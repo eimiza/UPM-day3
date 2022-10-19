@@ -109,13 +109,13 @@
                             </div>
                         </div>
                         <div class="col-md-2">
-                            <select name="" id="" class="form-control">
+                            <select name="" id="" class="form-control" v-model="sel_race">
                                 <option value="">- Select Race -</option>
                                 <option v-for="r in race" :value="r.code">{{r.race}}</option>
                             </select>
                         </div>
                         <div class="col-md-2">
-                            <select name="" id="" class="form-control">
+                            <select name="" id="" class="form-control" v-model="sel_religion">
                                 <option value="">- Select Religion -</option>
                                 <option v-for="r in religion" :value="r.code">{{r.religion}}</option>
                             </select>
@@ -182,6 +182,9 @@
         //dropdown data
         race: [],
         religion: [],
+
+        sel_race: '',
+        sel_religion: '',
 
         //employee data
         contents: [],
