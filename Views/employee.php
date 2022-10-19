@@ -111,11 +111,13 @@
                         <div class="col-md-2">
                             <select name="" id="" class="form-control">
                                 <option value="">- Select Race -</option>
+                                <option v-for="r in race" :value="r.code">{{r.race}}</option>
                             </select>
                         </div>
                         <div class="col-md-2">
                             <select name="" id="" class="form-control">
                                 <option value="">- Select Religion -</option>
+                                <option v-for="r in religion" :value="r.code">{{r.religion}}</option>
                             </select>
                         </div>   
                     </div>
@@ -176,6 +178,10 @@
       return {
         message: 'Hello Eimiza',
         datenow: '',
+
+        //dropdown data
+        race: [],
+        religion: [],
 
         //employee data
         contents: [],
@@ -259,6 +265,11 @@
             });
             console.log(add_data);
         },
+        get_dropdown_data(){
+            var self = this;
+            $.get('/api/race', function(res){self.race = res;});
+            $.get('/api/religion', function(res){self.religion = res;});
+        },
         get_data(page = 1) {
             var self = this;
             self.page = page;
@@ -275,6 +286,7 @@
     mounted(){
         this.show_date();
         this.get_data();
+        this.get_dropdown_data();
 
     },
   }).mount('#app')
