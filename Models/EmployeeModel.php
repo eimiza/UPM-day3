@@ -48,10 +48,13 @@ class EmployeeModel extends Model
         $db->select('religion.religion as religion');
         if($filter['name']){$db->orlike('employee.name', $filter['name']);};
         if($filter['name']){$db->orlike('employee.email', $filter['name']);};
+        if($filter['religion']){$db->where('employee.religion', $filter['religion']);};
+        if($filter['race']){$db->where('employee.race', $filter['race']);};
         $db->where('employee.deleted_at is null'); //if using soft delete
         $db->join('race', 'employee.race = race.code');
         $db->join('religion', 'employee.religion = religion.code');
         $db->limit($limit, $offset);
+        $db->orderBy('employee.id', 'ASC');
         $data = $db->get();
         if($data){
             return $data->getResultArray();
@@ -64,6 +67,8 @@ class EmployeeModel extends Model
         $db = $this->db->table('employee');
         if($filter['name']){$db->orlike('employee.name', $filter['name']);};
         if($filter['name']){$db->orlike('employee.email', $filter['name']);};
+        if($filter['religion']){$db->where('employee.religion', $filter['religion']);};
+        if($filter['race']){$db->where('employee.race', $filter['race']);};
         $db->where('deleted_at is null'); //if using soft delete
         $count = $db->countAllResults();
         if($count){
