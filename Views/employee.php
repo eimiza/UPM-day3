@@ -109,13 +109,13 @@
                             </div>
                         </div>
                         <div class="col-md-2">
-                            <select name="" id="" class="form-control" v-model="sel_race">
+                            <select @change="get_data(page)" name="" id="" class="form-control" v-model="sel_race">
                                 <option value="">- Select Race -</option>
                                 <option v-for="r in race" :value="r.code">{{r.race}}</option>
                             </select>
                         </div>
                         <div class="col-md-2">
-                            <select name="" id="" class="form-control" v-model="sel_religion">
+                            <select @change="get_data(page)" name="" id="" class="form-control" v-model="sel_religion">
                                 <option value="">- Select Religion -</option>
                                 <option v-for="r in religion" :value="r.code">{{r.religion}}</option>
                             </select>
@@ -279,6 +279,8 @@
             self.page = page;
             $.post('/api/employee/listing', {
                 search: self.search,
+                race: self.sel_race,
+                religion: self.sel_religion,
                 page: self.page,
             }, function(res){
                 self.contents = res.data;
