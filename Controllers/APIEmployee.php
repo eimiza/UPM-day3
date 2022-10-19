@@ -3,12 +3,14 @@
 namespace App\Controllers;
 
 use CodeIgniter\RESTful\ResourceController;
+use App\Libraries\Secure;
 
 class APIEmployee extends ResourceController
 {
     public function __construct(){
         $this->mod = model('App\Models\EmployeeModel');
         $this->dam = model('App\Models\DeptAssignModel');
+        $this->secure = new Secure();
     }
 
     public function listing(){
@@ -25,6 +27,11 @@ class APIEmployee extends ResourceController
         $offset = pagingOffset($page,$limit);
         
         $data = $this->mod->datatables($limit, $offset, $filter);
+        $data = array_map(function ($arr){
+            $arr['secure_id'] = $this->secure->enc_session($arr['id']);
+            return $arr;
+        },$data);
+
         $total_data = $this->mod->datacount($filter);
         $page_count = pagingTotalPage($total_data,$limit);
 
