@@ -10,7 +10,6 @@
         </button>
       </div>
       <div class="modal-body">
-        {{errors}}
         <form id="add_form">
             <div class="form-group">
                 <label>Name</label>
@@ -38,10 +37,11 @@
                 </select>
                 <div class="invalid-feedback">{{errors.religion}}</div>
             </div>
+            <input id="reset_add" type="reset" v-show="false"> 
         </form>
       </div>
       <div class="modal-footer">
-        <button @click="insert_data()" type="button" class="btn btn-primary">Update changes</button>
+        <button @click="insert_data()" type="button" class="btn btn-primary">Add Employee</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -65,9 +65,29 @@
                 <label>Name</label>
                 <input class="form-control" :class="{'is-invalid':errors.name}" name="name" :value="selected.name"></input>
                 <div class="invalid-feedback">{{errors.name}}</div>
+            </div>
+            <div class="form-group">
                 <label>Email</label>
                 <input class="form-control" :class="{'is-invalid':errors.email}" name="email" :value="selected.email"></input>
                 <div class="invalid-feedback">{{errors.email}}</div>
+            </div>
+            <div class="form-group">
+                <label>Race {{selected.race_id}}</label>
+                <select name="race" class="form-control" :class="{'is-invalid':errors.race}">
+                    <option value="">- Select Race -</option>
+                    <option :value="selected.race_id" selected>{{selected.race}}</option>
+                    <option :value="r.code" v-for="r in race" v-show="r.code != selected.race_id">{{r.race}}</option>
+                </select>
+                <div class="invalid-feedback">{{errors.race}}</div>
+            </div>
+            <div class="form-group">
+                <label>Religion</label>
+                <select name="religion" class="form-control" :class="{'is-invalid':errors.religion}">
+                    <option value="">- Select Religion -</option>
+                    <option :value="selected.religion_id" selected>{{selected.religion}}</option>
+                    <option :value="r.code" v-for="r in religion" v-show="r.code != selected.religion_id">{{r.religion}}</option>
+                </select>
+                <div class="invalid-feedback">{{errors.religion}}</div>
             </div>
         </form>
       </div>
@@ -222,6 +242,7 @@
             this.datenow = moment().format('Y-M-d');  
         },
         show_add(){
+            $('#reset_add').click();
             this.errors = [];
             $('#add_modal').modal('show');
         },
