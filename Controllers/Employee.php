@@ -35,7 +35,18 @@ class Employee extends BaseController
     public function download_excel(){
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
-        $sheet->setCellValue('A1', 'Hello World !');
+        $sheet->setCellValue('A1', 'Name');
+        $sheet->setCellValue('B1', 'Email');
+        $sheet->setCellValue('C1', 'IC');
+
+        $data = $this->mod->findAll();
+        $i = 2;
+        foreach($data as $d){
+            $sheet->setCellValue('A'.$i, $d['name']);
+            $sheet->setCellValue('B'.$i, $d['email']);
+            $sheet->setCellValue('C'.$i, $d['icno']);
+            $i++;
+        }
 
         $writer = new Xlsx($spreadsheet);
         //$writer->save(FCPATH.'uploads/hello world.xlsx');
@@ -43,5 +54,6 @@ class Employee extends BaseController
 
         header('Content-Type: application/vnd.ms-excel');
         header('Content-Disposition: attachment;filename="hello_world.xlsx"');
+        exit;
     }
 }
