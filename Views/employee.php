@@ -249,7 +249,7 @@
         show_edit(data){
             this.errors = [];
             this.selected = data;
-            this.selected_id = data.id;
+            this.selected_id = data.secure_id;
             $('#edit_modal').modal('show');
         },
         delete_data(data){
@@ -265,7 +265,7 @@
                 }).then((result) => {
                 if (result.isConfirmed) {
 
-                    $.post('/api/employee/delete/'+data.id, function(res){
+                    $.post('/api/employee/delete/'+data.secure_id, function(res){
                         self.get_data(1);
                     });
 
