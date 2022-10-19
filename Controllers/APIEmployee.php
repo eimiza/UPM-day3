@@ -17,6 +17,8 @@ class APIEmployee extends ResourceController
         //filter
         $filter['name'] = $this->request->getPost('search');
         $filter['email'] = $this->request->getPost('email');
+        $filter['religion'] = $this->request->getPost('religion');
+        $filter['race'] = $this->request->getPost('race');
 
         $page = $this->request->getPost('page');
         $limit = 10;
@@ -40,11 +42,15 @@ class APIEmployee extends ResourceController
         $validation = service('validation');
         if(!$this->validate([
             'name' => 'required',
-            'email' => 'required|valid_email'
+            'email' => 'required|valid_email',
+            'race' => 'required',
+            'religion' => 'required',
         ])){
             
             $error['name'] = $validation->getError('name');
             $error['email'] = $validation->getError('email');
+            $error['race'] = $validation->getError('race');
+            $error['religion'] = $validation->getError('religion');
 
             return $this->respond($error);
 
@@ -53,6 +59,8 @@ class APIEmployee extends ResourceController
             $data = [
                 'name' => $this->request->getPost('name'),
                 'email' => $this->request->getPost('email'),
+                'race' => $this->request->getPost('race'),
+                'religion' => $this->request->getPost('religion'),
             ];
             $this->mod->insert($data);
 
