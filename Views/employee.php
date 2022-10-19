@@ -86,6 +86,40 @@
                     </div>
                 </div>
                 <!-- /.card-header -->
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search Name">
+                                <div class="input-group-append">
+                                    <button @click="get_data()" type="submit" class="btn btn-default">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search Email">
+                                <div class="input-group-append">
+                                    <button @click="get_data()" type="submit" class="btn btn-default">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <select name="" id="" class="form-control">
+                                <option value="">- Select Race -</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <select name="" id="" class="form-control">
+                                <option value="">- Select Religion -</option>
+                            </select>
+                        </div>   
+                    </div>
+                </div>
                 <div class="card-body table-responsive p-0">
                     <table class="table table-hover text-nowrap">
                     <thead>
