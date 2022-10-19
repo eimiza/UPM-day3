@@ -22,6 +22,22 @@
                 <input class="form-control" :class="{'is-invalid':errors.email}" name="email"></input>
                 <div class="invalid-feedback">{{errors.email}}</div>
             </div>
+            <div class="form-group">
+                <label>Race</label>
+                <select name="race" class="form-control" :class="{'is-invalid':errors.race}">
+                    <option value="">- Select Race -</option>
+                    <option :value="r.code" v-for="r in race">{{r.race}}</option>
+                </select>
+                <div class="invalid-feedback">{{errors.race}}</div>
+            </div>
+            <div class="form-group">
+                <label>Religion</label>
+                <select name="religion" class="form-control" :class="{'is-invalid':errors.religion}">
+                    <option value="">- Select Religion -</option>
+                    <option :value="r.code" v-for="r in religion">{{r.religion}}</option>
+                </select>
+                <div class="invalid-feedback">{{errors.religion}}</div>
+            </div>
         </form>
       </div>
       <div class="modal-footer">
