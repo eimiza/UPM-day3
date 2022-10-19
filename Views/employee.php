@@ -16,6 +16,8 @@
                 <label>Name</label>
                 <input class="form-control" :class="{'is-invalid':errors.name}" name="name"></input>
                 <div class="invalid-feedback">{{errors.name}}</div>
+            </div>
+            <div class="form-group">
                 <label>Email</label>
                 <input class="form-control" :class="{'is-invalid':errors.email}" name="email"></input>
                 <div class="invalid-feedback">{{errors.email}}</div>
