@@ -121,6 +121,7 @@
                             </select>
                         </div>   
                     </div>
+                    {{sel_race}} {{sel_religion}}
                 </div>
                 <div class="card-body table-responsive p-0">
                     <table class="table table-hover text-nowrap">
