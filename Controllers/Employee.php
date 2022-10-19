@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Libraries\Secure;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class Employee extends BaseController
 {
@@ -31,6 +33,15 @@ class Employee extends BaseController
     }
 
     public function download_excel(){
-        echo 'download excel';
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        $sheet->setCellValue('A1', 'Hello World !');
+
+        $writer = new Xlsx($spreadsheet);
+        //$writer->save(FCPATH.'uploads/hello world.xlsx');
+        $writer->save("php://output");
+
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="hello_world.xlsx"');
     }
 }
