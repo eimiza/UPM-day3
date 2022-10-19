@@ -77,7 +77,8 @@ class APIEmployee extends ResourceController
     }
 
     public function update_data($id){
-        //$validation = \Config\Services::validation();
+        $id = $this->secure->dec_session($id);
+
         $validation = service('validation');
         if(!$this->validate([
             'name' => 'required',
@@ -101,6 +102,7 @@ class APIEmployee extends ResourceController
     }
 
     public function delete_data($id){
+        $id = $this->secure->dec_session($id);
         $this->mod->delete($id);
 
         $this->dam->where('emp_id',$id);
